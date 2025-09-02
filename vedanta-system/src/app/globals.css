@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary-neon: #fafafa;
+  --primary-neon-rgb: 0, 245, 255;
+}
+:root[data-theme="inline"] {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.2;
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 25, 0.6) 0%,
+    rgba(10, 14, 23, 0.9) 70%,
+    #0a0e17 100%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fade-in {
+  animation: fadeInAnimation ease 2s forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-glow {
+  transition: all 0.3s ease-in-out;
+}
+
+.card-glow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5),   /* bright blue */
+              0 0 30px rgba(59, 130, 246, 0.3),
+              0 0 45px rgba(59, 130, 246, 0.1);
+}
+.card-glow:hover img {
+  transform: scale(1.1); /* zoom in */
+}
+
+
+.toggle-button {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+  padding: 5px;
+  display: flex;
+  width: 220px;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Sliding highlight */
+.toggle-slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background-color: var(--primary-neon);
+  border-radius: 9999px;
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  box-shadow: 0 0 10px var(--primary-neon), 0 0 20px rgba(var(--primary-neon-rgb), 0.5);
+  z-index: 0;
+  transform: translateX(0%);
+}
+
+/* States */
+.products-active .toggle-slider {
+  transform: translateX(0%);
+}
+
+.services-active .toggle-slider {
+  transform: translateX(100%);
+}
+
+/* Buttons inside */
+.toggle-button button {
+  flex: 1;
+  z-index: 1; /* Keep text above slider */
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.3s ease-in-out;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.products-active .products-btn,
+.services-active .services-btn {
+  color: #111714; /* Dark text when active on neon */
+}
+
+.services-active .services-btn {
+  color: #111714;
+}
+
+.footer-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary-neon),
+    transparent
+  );
+}
+.footer-line-vertical {
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--primary-neon),
+    transparent
+  );
+}
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* makes sure the video fills screen without distortion */
+  z-index: 0; /* keep it behind content */
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 14, 23, 0.6); /* optional dark overlay */
+  z-index: 1;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* smaller font on mobile */
+  }
+
+  .hero-video {
+    opacity: 0.15; /* lighter video overlay for smaller screens */
+  }
+
+  .hero-overlay {
+    background: rgba(10, 14, 23, 0.75); /* stronger overlay for readability */
+  }
+
+  .card-glow {
+    margin: 1rem; /* spacing between cards */
+  }
+
+  .toggle-button {
+    width: 180px; /* smaller toggle on mobile */
+    padding: 4px;
+  }
+
+  .toggle-button button {
+    font-size: 0.8rem;
+  }
+
+  .footer-line,
+  .footer-line-vertical {
+    height: 1px;
+    width: 80%; /* make footer lines shorter */
+  }
+
+  header {
+    padding: 2rem 1rem; /* reduce padding on mobile */
+    flex-wrap: wrap; /* allow items to stack if needed */
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Optional: hide desktop nav and show mobile toggle nav */
+  .nav-link {
+    font-size: 0.875rem;
+  }
+
+  .card-glow:hover {
+    transform: translateY(0); /* avoid hover effect on touch devices */
+    box-shadow: none;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .toggle-button {
+    width: 150px;
+  }
+
+  .toggle-button button {
+    font-size: 0.75rem;
+  }
+
+  header h2 {
+    font-size: 1rem;
+  }
+
+  .hero-overlay {
+    background: rgba(10, 14, 23, 0.85); /* stronger overlay */
+  }
+}
