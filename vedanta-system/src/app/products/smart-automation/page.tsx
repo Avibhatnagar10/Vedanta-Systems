@@ -14,7 +14,7 @@ const featureData = [
     id: 2,
     title: "Glass Breaker Sensor",
     description: "Advanced glass break detection",
-    imageUrl: "/glass.png",
+    imageUrl: "/Glass.png",
   },
   {
     id: 3,
@@ -277,3 +277,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
