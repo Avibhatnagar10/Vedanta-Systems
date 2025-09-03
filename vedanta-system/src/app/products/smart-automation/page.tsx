@@ -221,7 +221,7 @@ const HomePage = () => {
             </button>
             <h2 className="text-2xl font-bold mb-2">Submit Your Query</h2>
             <p className="text-sm text-white/60 mb-6">
-              You're interested in:{" "}
+              You&apos;re interested in:{" "}
               <strong>{selectedFeatures.join(", ")}</strong>
             </p>
 
