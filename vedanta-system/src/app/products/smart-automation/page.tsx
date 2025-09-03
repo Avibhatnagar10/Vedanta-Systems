@@ -53,7 +53,7 @@ const HomePage = () => {
   // State variables to manage the page's interactivity
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
-  const [submittedQueries, setSubmittedQueries] = useState<any[]>([]);
+  const [, setSubmittedQueries] = useState<any[]>([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
