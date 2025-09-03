@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google"; // Geist_Mono is not used in the UI, can be removed if not needed elsewhere
 import "./globals.css";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+    display: "optional",
 });
+
+
 
 // Removed geistMono as it wasn't being used in the provided component code.
 // const geistMono = Geist_Mono({ ... });
