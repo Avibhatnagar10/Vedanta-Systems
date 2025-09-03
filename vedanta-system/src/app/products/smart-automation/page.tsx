@@ -53,7 +53,7 @@ const HomePage = () => {
   // State variables to manage the page's interactivity
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
-  const [, setSubmittedQueries] = useState<any[]>([]);
+  // const [submittedQueries, setSubmittedQueries] = useState<any[]>([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -93,7 +93,7 @@ const HomePage = () => {
       features: selectedFeatures,
       submittedAt: new Date().toLocaleString(),
     };
-    setSubmittedQueries((prev) => [newQuery, ...prev]);
+    // setSubmittedQueries((prev) => [newQuery, ...prev]);
     setIsModalOpen(false);
     setSelectedFeatures([]);
     setFormData({ name: "", email: "", company: "", location: "" });
