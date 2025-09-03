@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
+html {
+  scroll-behavior: smooth;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -11,6 +13,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --primary-500: #38e07b;
+  --primary-600: #1ff98c;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -247,4 +251,11 @@ body {
   .hero-overlay {
     background: rgba(10, 14, 23, 0.85); /* stronger overlay */
   }
+}
+
+.glassmorphic {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
