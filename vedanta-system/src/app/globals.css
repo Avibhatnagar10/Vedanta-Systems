@@ -1,11 +1,7 @@
 @import "tailwindcss";
 
 html, body {
-  overflow-x: hidden; /* ✅ keep */
-  overflow-y: auto;   /* ✅ only one scrollbar */
-  height: 100%;  
-  scrollbar-width: none;
-  scroll-behavior: smooth;     /* prevent nested scrollbars */
+  scroll-behavior: smooth;    
 }
 
 :root {
