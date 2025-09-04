@@ -1,13 +1,22 @@
 @import "tailwindcss";
-html {
-  scroll-behavior: smooth;
+
+html, body {
+  overflow-x: hidden; /* ✅ keep */
+  overflow-y: auto;   /* ✅ only one scrollbar */
+  height: 100%;  
+  scrollbar-width: none;
+  scroll-behavior: smooth;     /* prevent nested scrollbars */
 }
+
 :root {
-  --background: #ffffff;
+  --background: #ffffff;  
   --foreground: #171717;
-  --primary-neon: #fafafa;
-  --primary-neon-rgb: 0, 245, 255;
+
+  /* Neon primary */
+  --primary-neon: #38e07b; /* brighter green by default */
+  --primary-neon-rgb: 56, 224, 123;
 }
+
 :root[data-theme="inline"] {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -30,31 +39,34 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ---------------- HERO ---------------- */
 .hero-video {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills screen without distortion */
+  z-index: 0;
   opacity: 0.2;
 }
 
 .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(
     180deg,
     rgba(10, 10, 25, 0.6) 0%,
     rgba(10, 14, 23, 0.9) 70%,
     #0a0e17 100%
   );
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 1;
 }
 
+/* ---------------- ANIMATIONS ---------------- */
 .fade-in {
   animation: fadeInAnimation ease 2s forwards;
 }
@@ -70,21 +82,64 @@ body {
   }
 }
 
+/* ---------------- CARDS ---------------- */
 .card-glow {
   transition: all 0.3s ease-in-out;
 }
 
 .card-glow:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5),   /* bright blue */
-              0 0 30px rgba(59, 130, 246, 0.3),
-              0 0 45px rgba(59, 130, 246, 0.1);
+  box-shadow: 
+    0 0 15px rgba(56, 224, 123, 0.7),   /* neon glow */
+    0 0 30px rgba(56, 224, 123, 0.4),
+    0 0 45px rgba(56, 224, 123, 0.2);
 }
+
 .card-glow:hover img {
-  transform: scale(1.1); /* zoom in */
+  transform: scale(1.08); /* smoother zoom */
 }
 
+/* ---------------- BUTTONS ---------------- */
+.neon-button {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--primary-neon);
+  color: var(--primary-neon);
+  background: transparent;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.4s ease;
+  text-transform: uppercase;
+}
 
+.neon-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--primary-neon-rgb), 0.3),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.neon-button:hover {
+  color: #111714;
+  background: var(--primary-neon);
+  box-shadow: 
+    0 0 15px rgba(var(--primary-neon-rgb), 0.8),
+    0 0 30px rgba(var(--primary-neon-rgb), 0.6);
+}
+
+.neon-button:hover::before {
+  transform: translateX(100%);
+}
+
+/* ---------------- TOGGLE ---------------- */
 .toggle-button {
   position: relative;
   background-color: rgba(255, 255, 255, 0.05);
@@ -97,7 +152,6 @@ body {
   cursor: pointer;
 }
 
-/* Sliding highlight */
 .toggle-slider {
   position: absolute;
   top: 4px;
@@ -107,24 +161,21 @@ body {
   background-color: var(--primary-neon);
   border-radius: 9999px;
   transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  box-shadow: 0 0 10px var(--primary-neon), 0 0 20px rgba(var(--primary-neon-rgb), 0.5);
+  box-shadow: 0 0 10px var(--primary-neon),
+              0 0 20px rgba(var(--primary-neon-rgb), 0.5);
   z-index: 0;
-  transform: translateX(0%);
 }
 
-/* States */
 .products-active .toggle-slider {
   transform: translateX(0%);
 }
-
 .services-active .toggle-slider {
   transform: translateX(100%);
 }
 
-/* Buttons inside */
 .toggle-button button {
   flex: 1;
-  z-index: 1; /* Keep text above slider */
+  z-index: 1;
   border: none;
   background: transparent;
   font-weight: 600;
@@ -132,16 +183,12 @@ body {
   transition: color 0.3s ease-in-out;
   color: rgba(255, 255, 255, 0.6);
 }
-
 .products-active .products-btn,
-.services-active .services-btn {
-  color: #111714; /* Dark text when active on neon */
-}
-
 .services-active .services-btn {
   color: #111714;
 }
 
+/* ---------------- FOOTER ---------------- */
 .footer-line {
   height: 1px;
   background: linear-gradient(
@@ -160,46 +207,35 @@ body {
     transparent
   );
 }
-.hero-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* makes sure the video fills screen without distortion */
-  z-index: 0; /* keep it behind content */
+
+/* ---------------- GLASS ---------------- */
+.glassmorphic {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 14, 23, 0.6); /* optional dark overlay */
-  z-index: 1;
-}
-
-/* Mobile responsiveness */
+/* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 768px) {
   body {
-    font-size: 14px; /* smaller font on mobile */
+    font-size: 14px;
   }
 
   .hero-video {
-    opacity: 0.15; /* lighter video overlay for smaller screens */
+    opacity: 0.15;
   }
 
   .hero-overlay {
-    background: rgba(10, 14, 23, 0.75); /* stronger overlay for readability */
+    background: rgba(10, 14, 23, 0.75);
   }
 
   .card-glow {
-    margin: 1rem; /* spacing between cards */
+    margin: 1rem;
   }
 
   .toggle-button {
-    width: 180px; /* smaller toggle on mobile */
+    width: 180px;
     padding: 4px;
   }
 
@@ -210,12 +246,12 @@ body {
   .footer-line,
   .footer-line-vertical {
     height: 1px;
-    width: 80%; /* make footer lines shorter */
+    width: 80%;
   }
 
   header {
-    padding: 2rem 1rem; /* reduce padding on mobile */
-    flex-wrap: wrap; /* allow items to stack if needed */
+    padding: 2rem 1rem;
+    flex-wrap: wrap;
   }
 
   nav {
@@ -223,18 +259,16 @@ body {
     gap: 1rem;
   }
 
-  /* Optional: hide desktop nav and show mobile toggle nav */
   .nav-link {
     font-size: 0.875rem;
   }
 
   .card-glow:hover {
-    transform: translateY(0); /* avoid hover effect on touch devices */
+    transform: none;
     box-shadow: none;
   }
 }
 
-/* Extra small devices */
 @media (max-width: 480px) {
   .toggle-button {
     width: 150px;
@@ -249,13 +283,6 @@ body {
   }
 
   .hero-overlay {
-    background: rgba(10, 14, 23, 0.85); /* stronger overlay */
+    background: rgba(10, 14, 23, 0.85);
   }
-}
-
-.glassmorphic {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
