@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
+import Image from "next/image";
 
 // Query Form Modal
 function QueryForm({
@@ -113,20 +114,24 @@ export default function LaptopPage() {
   ];
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#0D0D0D] text-white font-['Space_Grotesk','Noto_Sans',sans-serif]">
+    <div className="relative flex min-h-screen flex-col overfl-hidden bg-[#0D0D0D] text-white font-['Space_Grotesk','Noto_Sans',sans-serif]">
       <main className="flex-grow">
         {/* Hero Section */}
-        <section
-          className="relative flex h-screen items-center justify-center text-center px-4"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(13, 13, 13, 0.7) 0%, #0D0D0D 100%), url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDG3igmvpBSmRDZa8MnKvZl5NJ7we5tGpJjlI_7tuEO_8W4gW0pM2J7X8o6RA3hfnM_f6hDgwemtKFiqqrxJ8csO2FW-kjjGZRR84kQUMbRMDzlNXDrXSQ86G2aXxjY8-A4b5GCTG8VMhuSr5Vo-u5A1PRe64Jg_RTGjSd8Xi3NYA0xGGMgmj-fjyG9nywS5TAZAz2h6rx9XZp_0kyGU6YBBRVWGWM_A_H_z5rLorNdTU3yhHfVgtJl63-nEITR7XV5j0oIC8YbtI')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-          }}
-        >
-          <div className="fade-in max-w-4xl space-y-6">
+        
+        <section className="relative flex h-screen items-center justify-center text-center px-4 overflow-hidden">
+          {/* Background Image */}
+          <Image
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDG3igmvpBSmRDZa8MnKvZl5NJ7we5tGpJjlI_7tuEO_8W4gW0pM2J7X8o6RA3hfnM_f6hDgwemtKFiqqrxJ8csO2FW-kjjGZRR84kQUMbRMDzlNXDrXSQ86G2aXxjY8-A4b5GCTG8VMhuSr5Vo-u5A1PRe64Jg_RTGjSd8Xi3NYA0xGGMgmj-fjyG9nywS5TAZAz2h6rx9XZp_0kyGU6YBBRVWGWM_A_H_z5rLorNdTU3yhHfVgtJl63-nEITR7XV5j0oIC8YbtI"
+            alt="Hero Background"
+            fill
+            priority
+            className="object-cover"
+          />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-[#0D0D0D]" />
+
+          {/* Content */}
+          <div className="fade-in relative z-10 max-w-4xl space-y-6">
             <h2 className="text-5xl font-black tracking-tighter md:text-6xl">
               Find the{" "}
               <span className="text-pink-500">
@@ -135,8 +140,8 @@ export default function LaptopPage() {
                   loop={0} // infinite loop
                   cursor
                   cursorStyle="|"
-                  typeSpeed={60} // slower typing for smoothness
-                  deleteSpeed={40} // slower deletion for natural feel
+                  typeSpeed={60} // smoother typing
+                  deleteSpeed={40} // natural deletion
                   delaySpeed={2000} // pause before switching
                 />
               </span>{" "}
@@ -147,14 +152,15 @@ export default function LaptopPage() {
               Explore our curated categories and send a query for personalized
               deals.
             </p>
+
             <div className="flex items-center justify-center w-full py-10">
               <a href="#categories">
                 <button
                   className="relative flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-8 
-                  bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 
-                  text-white text-lg font-bold shadow-[0_0_15px_rgba(168,85,247,0.7)] 
-                  transition-all duration-500 ease-out 
-                  hover:scale-110 hover:shadow-[0_0_35px_rgba(236,72,153,0.9)]"
+          bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 
+          text-white text-lg font-bold shadow-[0_0_15px_rgba(168,85,247,0.7)] 
+          transition-all duration-500 ease-out 
+          hover:scale-110 hover:shadow-[0_0_35px_rgba(236,72,153,0.9)]"
                 >
                   <span className="truncate z-10">Get Started</span>
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-700"></span>
@@ -163,7 +169,6 @@ export default function LaptopPage() {
             </div>
           </div>
         </section>
-
         {/* Categories Section */}
         <section id="categories" className="bg-[#0D0D0D]">
           <div className="container mx-auto">
@@ -213,8 +218,6 @@ export default function LaptopPage() {
           </div>
         </section>
       </main>
-
-      
 
       {showForm && (
         <QueryForm
