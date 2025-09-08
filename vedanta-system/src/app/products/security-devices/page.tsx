@@ -5,12 +5,12 @@ import Image from "next/image";
 const SecureViewPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
+
 
   const handleQueryClick = (product: string) => {
     setSelectedProduct(product);
     setShowForm(true);
-    setSuccessMsg("");
+  
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,18 +19,8 @@ const SecureViewPage = () => {
     const data = Object.fromEntries(formData);
     console.log("Form Submitted:", data);
 
-    // Show success message with username
-    const username = data.name as string;
-    setSuccessMsg(`Thanks ${username}, your query has been submitted!`);
-
-    // Reset form fields
-    e.currentTarget.reset();
-
-    // Auto-close after 2.5s
-    setTimeout(() => {
-      setShowForm(false);
-      setSuccessMsg("");
-    }, 2500);
+    // Close form after submit
+    setShowForm(false);
   };
 
   return (
