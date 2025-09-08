@@ -6,11 +6,9 @@ const SecureViewPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState("");
 
-
   const handleQueryClick = (product: string) => {
     setSelectedProduct(product);
     setShowForm(true);
-  
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -173,7 +171,7 @@ const SecureViewPage = () => {
               <h3 className="text-2xl font-bold mb-3">Voice Tracking PTZ</h3>
               <p className="text-gray-300 mb-6">
                 A cutting-edge camera that responds to your voice. Direct the
-                camera's view with simple commands, allowing for hands-free
+                camera&apos;s view with simple commands, allowing for hands-free
                 operation and immediate focus on areas of interest. Security
                 control has never been this intuitive.
               </p>
