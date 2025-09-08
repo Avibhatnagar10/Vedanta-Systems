@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 html, body {
-  scroll-behavior: smooth;    
+
+  
+  scroll-behavior: smooth;     /* prevent nested scrollbars */
 }
 
 :root {
@@ -11,6 +13,8 @@ html, body {
   /* Neon primary */
   --primary-neon: #38e07b; /* brighter green by default */
   --primary-neon-rgb: 56, 224, 123;
+  --cyan-glow: 0 0 15px rgba(10, 218, 242, 0.4), 0 0 25px rgba(10, 218, 242, 0.2);
+  --violet-glow: 0 0 15px rgba(138, 43, 226, 0.4), 0 0 25px rgba(138, 43, 226, 0.2);
 }
 
 :root[data-theme="inline"] {
@@ -65,6 +69,41 @@ body {
 /* ---------------- ANIMATIONS ---------------- */
 .fade-in {
   animation: fadeInAnimation ease 2s forwards;
+}
+
+
+/* app/globals.css */
+
+/* ... your existing styles ... */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-scroll-down {
+  animation: scroll-down 2s infinite;
 }
 
 @keyframes fadeInAnimation {
@@ -210,6 +249,31 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glassmorphism {
+  background: rgba(17, 22, 24, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(40, 51, 57, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glowing-button {
+  box-shadow: var(--cyan-glow);
+}
+
+.glowing-button:hover {
+  box-shadow: 0 0 25px rgba(10, 218, 242, 0.6), 0 0 35px rgba(10, 218, 242, 0.4);
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.product-card img {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 /* ---------------- RESPONSIVE ---------------- */
